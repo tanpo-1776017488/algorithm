@@ -1,0 +1,36 @@
+#include <iostream>
+#include <queue>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	int N, K;
+	cin >> N >> K;
+	int left, right,ans;
+	left = 1, right = K;
+  //k번째 수 가 k를 넘을 수는 없음.
+	int mid;
+	int temp_count = 0;
+	while (left <= right)
+	{
+		long long count = 0;//최대값 고려
+		mid = (left + right+1) / 2;
+		for (int i = 1; i <= N; i++)
+		{
+			temp_count = mid / i;
+			if (temp_count > N)
+				temp_count = N;
+			count += temp_count;
+		}
+		if (count < K)
+			left = mid + 1;
+		else//값의 중복도 포함되어 있기때문에 딱떨어지지 않을경우를 고려함.
+			right = mid - 1, ans = mid;
+
+	}
+	cout << ans;
+}
